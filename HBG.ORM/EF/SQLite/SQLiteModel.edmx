@@ -1,0 +1,202 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="SQLiteModel.Store" Provider="System.Data.SQLite.EF6" ProviderManifestToken="data source=H:\GitHub\Tools.NET\HBG.ORM\EF\SQLite\SQLite.db" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“main.T_Course”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="T_Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“main.T_Student”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="T_Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="10" />
+          <Property Name="Age" Type="int" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“main.T_StudentCourse”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="T_StudentCourse">
+          <Key>
+            <PropertyRef Name="RelateId" />
+          </Key>
+          <Property Name="RelateId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FK_StudentId" Type="nvarchar" MaxLength="100" />
+          <Property Name="FK_CourseId" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“main.V_StudentCourseView”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_StudentCourseView">
+          <Key>
+            <PropertyRef Name="RelateId" />
+          </Key>
+          <Property Name="RelateId" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="FK_StudentId" Type="nvarchar" MaxLength="100" />
+          <Property Name="FK_CourseId" Type="nvarchar" MaxLength="100" />
+          <Property Name="Name" Type="nvarchar" MaxLength="100" />
+          <Property Name="Sex" Type="nvarchar" MaxLength="10" />
+          <Property Name="Age" Type="int" />
+          <Property Name="Name:1" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="SQLiteModelStoreContainer">
+          <EntitySet Name="T_Course" EntityType="Self.T_Course" store:Type="Tables">
+            <DefiningQuery>SELECT 
+[T_Course].[CourseId] AS [CourseId], 
+[T_Course].[Name] AS [Name]
+FROM [T_Course] AS [T_Course]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_Student" EntityType="Self.T_Student" store:Type="Tables">
+            <DefiningQuery>SELECT 
+[T_Student].[StudentId] AS [StudentId], 
+[T_Student].[Name] AS [Name], 
+[T_Student].[Sex] AS [Sex], 
+[T_Student].[Age] AS [Age]
+FROM [T_Student] AS [T_Student]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="T_StudentCourse" EntityType="Self.T_StudentCourse" store:Type="Tables">
+            <DefiningQuery>SELECT 
+[T_StudentCourse].[RelateId] AS [RelateId], 
+[T_StudentCourse].[FK_StudentId] AS [FK_StudentId], 
+[T_StudentCourse].[FK_CourseId] AS [FK_CourseId]
+FROM [T_StudentCourse] AS [T_StudentCourse]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_StudentCourseView" EntityType="Self.V_StudentCourseView" store:Type="Views">
+            <DefiningQuery>SELECT 
+[V_StudentCourseView].[RelateId] AS [RelateId], 
+[V_StudentCourseView].[FK_StudentId] AS [FK_StudentId], 
+[V_StudentCourseView].[FK_CourseId] AS [FK_CourseId], 
+[V_StudentCourseView].[Name] AS [Name], 
+[V_StudentCourseView].[Sex] AS [Sex], 
+[V_StudentCourseView].[Age] AS [Age], 
+[V_StudentCourseView].[Name:1] AS [Name:1]
+FROM [V_StudentCourseView] AS [V_StudentCourseView]</DefiningQuery>
+          </EntitySet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="SQLiteModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_Course">
+          <Key>
+            <PropertyRef Name="CourseId" />
+          </Key>
+          <Property Name="CourseId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_Student">
+          <Key>
+            <PropertyRef Name="StudentId" />
+          </Key>
+          <Property Name="StudentId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+        </EntityType>
+        <EntityType Name="T_StudentCourse">
+          <Key>
+            <PropertyRef Name="RelateId" />
+          </Key>
+          <Property Name="RelateId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FK_StudentId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FK_CourseId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_StudentCourseView">
+          <Key>
+            <PropertyRef Name="RelateId" />
+          </Key>
+          <Property Name="RelateId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FK_StudentId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="FK_CourseId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="Sex" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="Age" Type="Int32" />
+          <Property Name="Name_1" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="SQLiteEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_Course" EntityType="Self.T_Course" />
+          <EntitySet Name="T_Student" EntityType="Self.T_Student" />
+          <EntitySet Name="T_StudentCourse" EntityType="Self.T_StudentCourse" />
+          <EntitySet Name="V_StudentCourseView" EntityType="Self.V_StudentCourseView" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="SQLiteModelStoreContainer" CdmEntityContainer="SQLiteEntities">
+          <EntitySetMapping Name="T_Course">
+            <EntityTypeMapping TypeName="SQLiteModel.T_Course">
+              <MappingFragment StoreEntitySet="T_Course">
+                <ScalarProperty Name="CourseId" ColumnName="CourseId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_Student">
+            <EntityTypeMapping TypeName="SQLiteModel.T_Student">
+              <MappingFragment StoreEntitySet="T_Student">
+                <ScalarProperty Name="StudentId" ColumnName="StudentId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_StudentCourse">
+            <EntityTypeMapping TypeName="SQLiteModel.T_StudentCourse">
+              <MappingFragment StoreEntitySet="T_StudentCourse">
+                <ScalarProperty Name="RelateId" ColumnName="RelateId" />
+                <ScalarProperty Name="FK_StudentId" ColumnName="FK_StudentId" />
+                <ScalarProperty Name="FK_CourseId" ColumnName="FK_CourseId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_StudentCourseView">
+            <EntityTypeMapping TypeName="SQLiteModel.V_StudentCourseView">
+              <MappingFragment StoreEntitySet="V_StudentCourseView">
+                <ScalarProperty Name="RelateId" ColumnName="RelateId" />
+                <ScalarProperty Name="FK_StudentId" ColumnName="FK_StudentId" />
+                <ScalarProperty Name="FK_CourseId" ColumnName="FK_CourseId" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sex" ColumnName="Sex" />
+                <ScalarProperty Name="Age" ColumnName="Age" />
+                <ScalarProperty Name="Name_1" ColumnName="Name:1" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

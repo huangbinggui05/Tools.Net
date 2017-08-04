@@ -1,0 +1,492 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Super100网管系统自监控v1Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="T_YJCollectProgramMonitor_Alm">
+          <Key>
+            <PropertyRef Name="AlarmId" />
+          </Key>
+          <Property Name="AlarmId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_BaseData" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AlmTitle" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AlmInfo" Type="nvarchar" MaxLength="4000" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="PutMQStatus" Type="int" />
+          <Property Name="AlmState" Type="nvarchar" MaxLength="100" />
+          <Property Name="LogFileName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="InputDt" Type="datetime" />
+          <Property Name="LastModifyDt" Type="datetime" />
+        </EntityType>
+        <EntityType Name="T_YJCollectProgramMonitor_AssistJob">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="JobCron" Type="nvarchar" MaxLength="200" />
+          <Property Name="JobCls" Type="nvarchar" MaxLength="200" />
+          <Property Name="IsStart" Type="bit" />
+          <Property Name="JobRemark" Type="nvarchar" MaxLength="2000" />
+        </EntityType>
+        <EntityType Name="T_YJCollectProgramMonitor_BaseData">
+          <Key>
+            <PropertyRef Name="BaseDataId" />
+          </Key>
+          <Property Name="BaseDataId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MonitorObjIp" Type="nvarchar" MaxLength="100" />
+          <Property Name="MonitorObjLogPath" Type="nvarchar" MaxLength="1000" />
+          <Property Name="EvtTyp" Type="nvarchar" MaxLength="200" />
+          <Property Name="AlmLvl" Type="nvarchar" MaxLength="200" />
+          <Property Name="MonitorObjName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsNeedChk" Type="bit" />
+          <Property Name="FK_Cron" Type="uniqueidentifier" />
+          <Property Name="BaseDataRemark" Type="nvarchar" MaxLength="4000" />
+          <Property Name="MonitorPrefixUri" Type="nvarchar" MaxLength="1000" />
+        </EntityType>
+        <EntityType Name="T_YJCollectProgramMonitor_Cron">
+          <Key>
+            <PropertyRef Name="CronId" />
+          </Key>
+          <Property Name="CronId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="Cron" Type="nvarchar" MaxLength="200" />
+          <Property Name="CronRemark" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <EntityType Name="T_YJCollectProgramMonitor_TrLog">
+          <Key>
+            <PropertyRef Name="TrLogId" />
+          </Key>
+          <Property Name="TrLogId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="InputDt" Type="datetime" />
+          <Property Name="TrTbl" Type="nvarchar" MaxLength="200" />
+          <Property Name="TrTyp" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Super100网管系统自监控v1.dbo.V_YJCollectProgramMonitor_AlmView”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_YJCollectProgramMonitor_AlmView">
+          <Key>
+            <PropertyRef Name="AlarmId" />
+            <PropertyRef Name="FK_BaseData" />
+          </Key>
+          <Property Name="AlarmId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="FK_BaseData" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="AlmTitle" Type="nvarchar" MaxLength="1000" />
+          <Property Name="AlmInfo" Type="nvarchar" MaxLength="4000" />
+          <Property Name="IsDeleted" Type="bit" />
+          <Property Name="PutMQStatus" Type="int" />
+          <Property Name="AlmState" Type="nvarchar" MaxLength="100" />
+          <Property Name="LogFileName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="InputDt" Type="datetime" />
+          <Property Name="LastModifyDt" Type="datetime" />
+          <Property Name="BaseDataId" Type="uniqueidentifier" />
+          <Property Name="MonitorObjIp" Type="nvarchar" MaxLength="100" />
+          <Property Name="MonitorObjLogPath" Type="nvarchar" MaxLength="1000" />
+          <Property Name="EvtTyp" Type="nvarchar" MaxLength="200" />
+          <Property Name="AlmLvl" Type="nvarchar" MaxLength="200" />
+          <Property Name="MonitorObjName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsNeedChk" Type="bit" />
+          <Property Name="FK_Cron" Type="uniqueidentifier" />
+          <Property Name="BaseDataRemark" Type="nvarchar" MaxLength="4000" />
+          <Property Name="MonitorPrefixUri" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CronId" Type="uniqueidentifier" />
+          <Property Name="Cron" Type="nvarchar" MaxLength="200" />
+          <Property Name="CronRemark" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <!--生成过程中发现错误:
+警告 6002: 表/视图“Super100网管系统自监控v1.dbo.V_YJCollectProgramMonitor_BaseDataView”未定义主键。已推断出该键，并将定义创建为只读的表/视图。-->
+        <EntityType Name="V_YJCollectProgramMonitor_BaseDataView">
+          <Key>
+            <PropertyRef Name="BaseDataId" />
+          </Key>
+          <Property Name="BaseDataId" Type="uniqueidentifier" Nullable="false" />
+          <Property Name="MonitorObjIp" Type="nvarchar" MaxLength="100" />
+          <Property Name="MonitorObjLogPath" Type="nvarchar" MaxLength="1000" />
+          <Property Name="EvtTyp" Type="nvarchar" MaxLength="200" />
+          <Property Name="AlmLvl" Type="nvarchar" MaxLength="200" />
+          <Property Name="MonitorObjName" Type="nvarchar" MaxLength="1000" />
+          <Property Name="IsNeedChk" Type="bit" />
+          <Property Name="FK_Cron" Type="uniqueidentifier" />
+          <Property Name="BaseDataRemark" Type="nvarchar" MaxLength="4000" />
+          <Property Name="MonitorPrefixUri" Type="nvarchar" MaxLength="1000" />
+          <Property Name="CronId" Type="uniqueidentifier" />
+          <Property Name="Cron" Type="nvarchar" MaxLength="200" />
+          <Property Name="CronRemark" Type="nvarchar" MaxLength="4000" />
+        </EntityType>
+        <Association Name="FK_T_YJCOLL_REFERENCE_T_YJCOLL">
+          <End Role="T_YJCollectProgramMonitor_BaseData" Type="Self.T_YJCollectProgramMonitor_BaseData" Multiplicity="1" />
+          <End Role="T_YJCollectProgramMonitor_Alm" Type="Self.T_YJCollectProgramMonitor_Alm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_YJCollectProgramMonitor_BaseData">
+              <PropertyRef Name="BaseDataId" />
+            </Principal>
+            <Dependent Role="T_YJCollectProgramMonitor_Alm">
+              <PropertyRef Name="FK_BaseData" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_YJCOLL_REFERENCE_T_YJCOLL2">
+          <End Role="T_YJCollectProgramMonitor_Cron" Type="Self.T_YJCollectProgramMonitor_Cron" Multiplicity="0..1" />
+          <End Role="T_YJCollectProgramMonitor_BaseData" Type="Self.T_YJCollectProgramMonitor_BaseData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_YJCollectProgramMonitor_Cron">
+              <PropertyRef Name="CronId" />
+            </Principal>
+            <Dependent Role="T_YJCollectProgramMonitor_BaseData">
+              <PropertyRef Name="FK_Cron" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Super100网管系统自监控v1ModelStoreContainer">
+          <EntitySet Name="T_YJCollectProgramMonitor_Alm" EntityType="Self.T_YJCollectProgramMonitor_Alm" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_YJCollectProgramMonitor_AssistJob" EntityType="Self.T_YJCollectProgramMonitor_AssistJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_YJCollectProgramMonitor_BaseData" EntityType="Self.T_YJCollectProgramMonitor_BaseData" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_YJCollectProgramMonitor_Cron" EntityType="Self.T_YJCollectProgramMonitor_Cron" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="T_YJCollectProgramMonitor_TrLog" EntityType="Self.T_YJCollectProgramMonitor_TrLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="V_YJCollectProgramMonitor_AlmView" EntityType="Self.V_YJCollectProgramMonitor_AlmView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_YJCollectProgramMonitor_AlmView].[AlarmId] AS [AlarmId], 
+    [V_YJCollectProgramMonitor_AlmView].[FK_BaseData] AS [FK_BaseData], 
+    [V_YJCollectProgramMonitor_AlmView].[AlmTitle] AS [AlmTitle], 
+    [V_YJCollectProgramMonitor_AlmView].[AlmInfo] AS [AlmInfo], 
+    [V_YJCollectProgramMonitor_AlmView].[IsDeleted] AS [IsDeleted], 
+    [V_YJCollectProgramMonitor_AlmView].[PutMQStatus] AS [PutMQStatus], 
+    [V_YJCollectProgramMonitor_AlmView].[AlmState] AS [AlmState], 
+    [V_YJCollectProgramMonitor_AlmView].[LogFileName] AS [LogFileName], 
+    [V_YJCollectProgramMonitor_AlmView].[InputDt] AS [InputDt], 
+    [V_YJCollectProgramMonitor_AlmView].[LastModifyDt] AS [LastModifyDt], 
+    [V_YJCollectProgramMonitor_AlmView].[BaseDataId] AS [BaseDataId], 
+    [V_YJCollectProgramMonitor_AlmView].[MonitorObjIp] AS [MonitorObjIp], 
+    [V_YJCollectProgramMonitor_AlmView].[MonitorObjLogPath] AS [MonitorObjLogPath], 
+    [V_YJCollectProgramMonitor_AlmView].[EvtTyp] AS [EvtTyp], 
+    [V_YJCollectProgramMonitor_AlmView].[AlmLvl] AS [AlmLvl], 
+    [V_YJCollectProgramMonitor_AlmView].[MonitorObjName] AS [MonitorObjName], 
+    [V_YJCollectProgramMonitor_AlmView].[IsNeedChk] AS [IsNeedChk], 
+    [V_YJCollectProgramMonitor_AlmView].[FK_Cron] AS [FK_Cron], 
+    [V_YJCollectProgramMonitor_AlmView].[BaseDataRemark] AS [BaseDataRemark], 
+    [V_YJCollectProgramMonitor_AlmView].[MonitorPrefixUri] AS [MonitorPrefixUri], 
+    [V_YJCollectProgramMonitor_AlmView].[CronId] AS [CronId], 
+    [V_YJCollectProgramMonitor_AlmView].[Cron] AS [Cron], 
+    [V_YJCollectProgramMonitor_AlmView].[CronRemark] AS [CronRemark]
+    FROM [dbo].[V_YJCollectProgramMonitor_AlmView] AS [V_YJCollectProgramMonitor_AlmView]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="V_YJCollectProgramMonitor_BaseDataView" EntityType="Self.V_YJCollectProgramMonitor_BaseDataView" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [V_YJCollectProgramMonitor_BaseDataView].[BaseDataId] AS [BaseDataId], 
+    [V_YJCollectProgramMonitor_BaseDataView].[MonitorObjIp] AS [MonitorObjIp], 
+    [V_YJCollectProgramMonitor_BaseDataView].[MonitorObjLogPath] AS [MonitorObjLogPath], 
+    [V_YJCollectProgramMonitor_BaseDataView].[EvtTyp] AS [EvtTyp], 
+    [V_YJCollectProgramMonitor_BaseDataView].[AlmLvl] AS [AlmLvl], 
+    [V_YJCollectProgramMonitor_BaseDataView].[MonitorObjName] AS [MonitorObjName], 
+    [V_YJCollectProgramMonitor_BaseDataView].[IsNeedChk] AS [IsNeedChk], 
+    [V_YJCollectProgramMonitor_BaseDataView].[FK_Cron] AS [FK_Cron], 
+    [V_YJCollectProgramMonitor_BaseDataView].[BaseDataRemark] AS [BaseDataRemark], 
+    [V_YJCollectProgramMonitor_BaseDataView].[MonitorPrefixUri] AS [MonitorPrefixUri], 
+    [V_YJCollectProgramMonitor_BaseDataView].[CronId] AS [CronId], 
+    [V_YJCollectProgramMonitor_BaseDataView].[Cron] AS [Cron], 
+    [V_YJCollectProgramMonitor_BaseDataView].[CronRemark] AS [CronRemark]
+    FROM [dbo].[V_YJCollectProgramMonitor_BaseDataView] AS [V_YJCollectProgramMonitor_BaseDataView]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_T_YJCOLL_REFERENCE_T_YJCOLL" Association="Self.FK_T_YJCOLL_REFERENCE_T_YJCOLL">
+            <End Role="T_YJCollectProgramMonitor_BaseData" EntitySet="T_YJCollectProgramMonitor_BaseData" />
+            <End Role="T_YJCollectProgramMonitor_Alm" EntitySet="T_YJCollectProgramMonitor_Alm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_YJCOLL_REFERENCE_T_YJCOLL2" Association="Self.FK_T_YJCOLL_REFERENCE_T_YJCOLL2">
+            <End Role="T_YJCollectProgramMonitor_Cron" EntitySet="T_YJCollectProgramMonitor_Cron" />
+            <End Role="T_YJCollectProgramMonitor_BaseData" EntitySet="T_YJCollectProgramMonitor_BaseData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Super100网管系统自监控v1Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="T_YJCollectProgramMonitor_Alm">
+          <Key>
+            <PropertyRef Name="AlarmId" />
+          </Key>
+          <Property Name="AlarmId" Type="Guid" Nullable="false" />
+          <Property Name="FK_BaseData" Type="Guid" Nullable="false" />
+          <Property Name="AlmTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AlmInfo" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="PutMQStatus" Type="Int32" />
+          <Property Name="AlmState" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LogFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="InputDt" Type="DateTime" Precision="3" />
+          <Property Name="LastModifyDt" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="T_YJCollectProgramMonitor_BaseData" Relationship="Self.FK_T_YJCOLL_REFERENCE_T_YJCOLL" FromRole="T_YJCollectProgramMonitor_Alm" ToRole="T_YJCollectProgramMonitor_BaseData" />
+        </EntityType>
+        <EntityType Name="T_YJCollectProgramMonitor_AssistJob">
+          <Key>
+            <PropertyRef Name="JobId" />
+          </Key>
+          <Property Name="JobId" Type="Guid" Nullable="false" />
+          <Property Name="JobCron" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="JobCls" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="IsStart" Type="Boolean" />
+          <Property Name="JobRemark" Type="String" MaxLength="2000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="T_YJCollectProgramMonitor_BaseData">
+          <Key>
+            <PropertyRef Name="BaseDataId" />
+          </Key>
+          <Property Name="BaseDataId" Type="Guid" Nullable="false" />
+          <Property Name="MonitorObjIp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorObjLogPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="EvtTyp" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AlmLvl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorObjName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsNeedChk" Type="Boolean" />
+          <Property Name="FK_Cron" Type="Guid" />
+          <Property Name="BaseDataRemark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorPrefixUri" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="T_YJCollectProgramMonitor_Alm" Relationship="Self.FK_T_YJCOLL_REFERENCE_T_YJCOLL" FromRole="T_YJCollectProgramMonitor_BaseData" ToRole="T_YJCollectProgramMonitor_Alm" />
+          <NavigationProperty Name="T_YJCollectProgramMonitor_Cron" Relationship="Self.FK_T_YJCOLL_REFERENCE_T_YJCOLL2" FromRole="T_YJCollectProgramMonitor_BaseData" ToRole="T_YJCollectProgramMonitor_Cron" />
+        </EntityType>
+        <EntityType Name="T_YJCollectProgramMonitor_Cron">
+          <Key>
+            <PropertyRef Name="CronId" />
+          </Key>
+          <Property Name="CronId" Type="Guid" Nullable="false" />
+          <Property Name="Cron" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CronRemark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="T_YJCollectProgramMonitor_BaseData" Relationship="Self.FK_T_YJCOLL_REFERENCE_T_YJCOLL2" FromRole="T_YJCollectProgramMonitor_Cron" ToRole="T_YJCollectProgramMonitor_BaseData" />
+        </EntityType>
+        <EntityType Name="T_YJCollectProgramMonitor_TrLog">
+          <Key>
+            <PropertyRef Name="TrLogId" />
+          </Key>
+          <Property Name="TrLogId" Type="Guid" Nullable="false" />
+          <Property Name="InputDt" Type="DateTime" Precision="3" />
+          <Property Name="TrTbl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="TrTyp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_YJCollectProgramMonitor_AlmView">
+          <Key>
+            <PropertyRef Name="AlarmId" />
+            <PropertyRef Name="FK_BaseData" />
+          </Key>
+          <Property Name="AlarmId" Type="Guid" Nullable="false" />
+          <Property Name="FK_BaseData" Type="Guid" Nullable="false" />
+          <Property Name="AlmTitle" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="AlmInfo" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="IsDeleted" Type="Boolean" />
+          <Property Name="PutMQStatus" Type="Int32" />
+          <Property Name="AlmState" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="LogFileName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="InputDt" Type="DateTime" Precision="3" />
+          <Property Name="LastModifyDt" Type="DateTime" Precision="3" />
+          <Property Name="BaseDataId" Type="Guid" />
+          <Property Name="MonitorObjIp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorObjLogPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="EvtTyp" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AlmLvl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorObjName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsNeedChk" Type="Boolean" />
+          <Property Name="FK_Cron" Type="Guid" />
+          <Property Name="BaseDataRemark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorPrefixUri" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CronId" Type="Guid" />
+          <Property Name="Cron" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CronRemark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="V_YJCollectProgramMonitor_BaseDataView">
+          <Key>
+            <PropertyRef Name="BaseDataId" />
+          </Key>
+          <Property Name="BaseDataId" Type="Guid" Nullable="false" />
+          <Property Name="MonitorObjIp" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorObjLogPath" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="EvtTyp" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="AlmLvl" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorObjName" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="IsNeedChk" Type="Boolean" />
+          <Property Name="FK_Cron" Type="Guid" />
+          <Property Name="BaseDataRemark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="MonitorPrefixUri" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="CronId" Type="Guid" />
+          <Property Name="Cron" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+          <Property Name="CronRemark" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_T_YJCOLL_REFERENCE_T_YJCOLL">
+          <End Role="T_YJCollectProgramMonitor_BaseData" Type="Self.T_YJCollectProgramMonitor_BaseData" Multiplicity="1" />
+          <End Role="T_YJCollectProgramMonitor_Alm" Type="Self.T_YJCollectProgramMonitor_Alm" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_YJCollectProgramMonitor_BaseData">
+              <PropertyRef Name="BaseDataId" />
+            </Principal>
+            <Dependent Role="T_YJCollectProgramMonitor_Alm">
+              <PropertyRef Name="FK_BaseData" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_T_YJCOLL_REFERENCE_T_YJCOLL2">
+          <End Role="T_YJCollectProgramMonitor_Cron" Type="Self.T_YJCollectProgramMonitor_Cron" Multiplicity="0..1" />
+          <End Role="T_YJCollectProgramMonitor_BaseData" Type="Self.T_YJCollectProgramMonitor_BaseData" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="T_YJCollectProgramMonitor_Cron">
+              <PropertyRef Name="CronId" />
+            </Principal>
+            <Dependent Role="T_YJCollectProgramMonitor_BaseData">
+              <PropertyRef Name="FK_Cron" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Super100网管系统自监控v1Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="T_YJCollectProgramMonitor_Alm" EntityType="Self.T_YJCollectProgramMonitor_Alm" />
+          <EntitySet Name="T_YJCollectProgramMonitor_AssistJob" EntityType="Self.T_YJCollectProgramMonitor_AssistJob" />
+          <EntitySet Name="T_YJCollectProgramMonitor_BaseData" EntityType="Self.T_YJCollectProgramMonitor_BaseData" />
+          <EntitySet Name="T_YJCollectProgramMonitor_Cron" EntityType="Self.T_YJCollectProgramMonitor_Cron" />
+          <EntitySet Name="T_YJCollectProgramMonitor_TrLog" EntityType="Self.T_YJCollectProgramMonitor_TrLog" />
+          <EntitySet Name="V_YJCollectProgramMonitor_AlmView" EntityType="Self.V_YJCollectProgramMonitor_AlmView" />
+          <EntitySet Name="V_YJCollectProgramMonitor_BaseDataView" EntityType="Self.V_YJCollectProgramMonitor_BaseDataView" />
+          <AssociationSet Name="FK_T_YJCOLL_REFERENCE_T_YJCOLL" Association="Self.FK_T_YJCOLL_REFERENCE_T_YJCOLL">
+            <End Role="T_YJCollectProgramMonitor_BaseData" EntitySet="T_YJCollectProgramMonitor_BaseData" />
+            <End Role="T_YJCollectProgramMonitor_Alm" EntitySet="T_YJCollectProgramMonitor_Alm" />
+          </AssociationSet>
+          <AssociationSet Name="FK_T_YJCOLL_REFERENCE_T_YJCOLL2" Association="Self.FK_T_YJCOLL_REFERENCE_T_YJCOLL2">
+            <End Role="T_YJCollectProgramMonitor_Cron" EntitySet="T_YJCollectProgramMonitor_Cron" />
+            <End Role="T_YJCollectProgramMonitor_BaseData" EntitySet="T_YJCollectProgramMonitor_BaseData" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Super100网管系统自监控v1ModelStoreContainer" CdmEntityContainer="Super100网管系统自监控v1Entities">
+          <EntitySetMapping Name="T_YJCollectProgramMonitor_Alm">
+            <EntityTypeMapping TypeName="Super100网管系统自监控v1Model.T_YJCollectProgramMonitor_Alm">
+              <MappingFragment StoreEntitySet="T_YJCollectProgramMonitor_Alm">
+                <ScalarProperty Name="AlarmId" ColumnName="AlarmId" />
+                <ScalarProperty Name="FK_BaseData" ColumnName="FK_BaseData" />
+                <ScalarProperty Name="AlmTitle" ColumnName="AlmTitle" />
+                <ScalarProperty Name="AlmInfo" ColumnName="AlmInfo" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PutMQStatus" ColumnName="PutMQStatus" />
+                <ScalarProperty Name="AlmState" ColumnName="AlmState" />
+                <ScalarProperty Name="LogFileName" ColumnName="LogFileName" />
+                <ScalarProperty Name="InputDt" ColumnName="InputDt" />
+                <ScalarProperty Name="LastModifyDt" ColumnName="LastModifyDt" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_YJCollectProgramMonitor_AssistJob">
+            <EntityTypeMapping TypeName="Super100网管系统自监控v1Model.T_YJCollectProgramMonitor_AssistJob">
+              <MappingFragment StoreEntitySet="T_YJCollectProgramMonitor_AssistJob">
+                <ScalarProperty Name="JobId" ColumnName="JobId" />
+                <ScalarProperty Name="JobCron" ColumnName="JobCron" />
+                <ScalarProperty Name="JobCls" ColumnName="JobCls" />
+                <ScalarProperty Name="IsStart" ColumnName="IsStart" />
+                <ScalarProperty Name="JobRemark" ColumnName="JobRemark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_YJCollectProgramMonitor_BaseData">
+            <EntityTypeMapping TypeName="Super100网管系统自监控v1Model.T_YJCollectProgramMonitor_BaseData">
+              <MappingFragment StoreEntitySet="T_YJCollectProgramMonitor_BaseData">
+                <ScalarProperty Name="BaseDataId" ColumnName="BaseDataId" />
+                <ScalarProperty Name="MonitorObjIp" ColumnName="MonitorObjIp" />
+                <ScalarProperty Name="MonitorObjLogPath" ColumnName="MonitorObjLogPath" />
+                <ScalarProperty Name="EvtTyp" ColumnName="EvtTyp" />
+                <ScalarProperty Name="AlmLvl" ColumnName="AlmLvl" />
+                <ScalarProperty Name="MonitorObjName" ColumnName="MonitorObjName" />
+                <ScalarProperty Name="IsNeedChk" ColumnName="IsNeedChk" />
+                <ScalarProperty Name="FK_Cron" ColumnName="FK_Cron" />
+                <ScalarProperty Name="BaseDataRemark" ColumnName="BaseDataRemark" />
+                <ScalarProperty Name="MonitorPrefixUri" ColumnName="MonitorPrefixUri" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_YJCollectProgramMonitor_Cron">
+            <EntityTypeMapping TypeName="Super100网管系统自监控v1Model.T_YJCollectProgramMonitor_Cron">
+              <MappingFragment StoreEntitySet="T_YJCollectProgramMonitor_Cron">
+                <ScalarProperty Name="CronId" ColumnName="CronId" />
+                <ScalarProperty Name="Cron" ColumnName="Cron" />
+                <ScalarProperty Name="CronRemark" ColumnName="CronRemark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="T_YJCollectProgramMonitor_TrLog">
+            <EntityTypeMapping TypeName="Super100网管系统自监控v1Model.T_YJCollectProgramMonitor_TrLog">
+              <MappingFragment StoreEntitySet="T_YJCollectProgramMonitor_TrLog">
+                <ScalarProperty Name="TrLogId" ColumnName="TrLogId" />
+                <ScalarProperty Name="InputDt" ColumnName="InputDt" />
+                <ScalarProperty Name="TrTbl" ColumnName="TrTbl" />
+                <ScalarProperty Name="TrTyp" ColumnName="TrTyp" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_YJCollectProgramMonitor_AlmView">
+            <EntityTypeMapping TypeName="Super100网管系统自监控v1Model.V_YJCollectProgramMonitor_AlmView">
+              <MappingFragment StoreEntitySet="V_YJCollectProgramMonitor_AlmView">
+                <ScalarProperty Name="AlarmId" ColumnName="AlarmId" />
+                <ScalarProperty Name="FK_BaseData" ColumnName="FK_BaseData" />
+                <ScalarProperty Name="AlmTitle" ColumnName="AlmTitle" />
+                <ScalarProperty Name="AlmInfo" ColumnName="AlmInfo" />
+                <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+                <ScalarProperty Name="PutMQStatus" ColumnName="PutMQStatus" />
+                <ScalarProperty Name="AlmState" ColumnName="AlmState" />
+                <ScalarProperty Name="LogFileName" ColumnName="LogFileName" />
+                <ScalarProperty Name="InputDt" ColumnName="InputDt" />
+                <ScalarProperty Name="LastModifyDt" ColumnName="LastModifyDt" />
+                <ScalarProperty Name="BaseDataId" ColumnName="BaseDataId" />
+                <ScalarProperty Name="MonitorObjIp" ColumnName="MonitorObjIp" />
+                <ScalarProperty Name="MonitorObjLogPath" ColumnName="MonitorObjLogPath" />
+                <ScalarProperty Name="EvtTyp" ColumnName="EvtTyp" />
+                <ScalarProperty Name="AlmLvl" ColumnName="AlmLvl" />
+                <ScalarProperty Name="MonitorObjName" ColumnName="MonitorObjName" />
+                <ScalarProperty Name="IsNeedChk" ColumnName="IsNeedChk" />
+                <ScalarProperty Name="FK_Cron" ColumnName="FK_Cron" />
+                <ScalarProperty Name="BaseDataRemark" ColumnName="BaseDataRemark" />
+                <ScalarProperty Name="MonitorPrefixUri" ColumnName="MonitorPrefixUri" />
+                <ScalarProperty Name="CronId" ColumnName="CronId" />
+                <ScalarProperty Name="Cron" ColumnName="Cron" />
+                <ScalarProperty Name="CronRemark" ColumnName="CronRemark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="V_YJCollectProgramMonitor_BaseDataView">
+            <EntityTypeMapping TypeName="Super100网管系统自监控v1Model.V_YJCollectProgramMonitor_BaseDataView">
+              <MappingFragment StoreEntitySet="V_YJCollectProgramMonitor_BaseDataView">
+                <ScalarProperty Name="BaseDataId" ColumnName="BaseDataId" />
+                <ScalarProperty Name="MonitorObjIp" ColumnName="MonitorObjIp" />
+                <ScalarProperty Name="MonitorObjLogPath" ColumnName="MonitorObjLogPath" />
+                <ScalarProperty Name="EvtTyp" ColumnName="EvtTyp" />
+                <ScalarProperty Name="AlmLvl" ColumnName="AlmLvl" />
+                <ScalarProperty Name="MonitorObjName" ColumnName="MonitorObjName" />
+                <ScalarProperty Name="IsNeedChk" ColumnName="IsNeedChk" />
+                <ScalarProperty Name="FK_Cron" ColumnName="FK_Cron" />
+                <ScalarProperty Name="BaseDataRemark" ColumnName="BaseDataRemark" />
+                <ScalarProperty Name="MonitorPrefixUri" ColumnName="MonitorPrefixUri" />
+                <ScalarProperty Name="CronId" ColumnName="CronId" />
+                <ScalarProperty Name="Cron" ColumnName="Cron" />
+                <ScalarProperty Name="CronRemark" ColumnName="CronRemark" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="无" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

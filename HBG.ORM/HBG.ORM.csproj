@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E8C622FE-C2BE-4E79-8B04-BA87C0983E3F}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>HBG.ORM</RootNamespace>
+    <AssemblyName>HBG.ORM</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <NuGetPackageImportStamp>
+    </NuGetPackageImportStamp>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.0.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.SQLite, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=AMD64">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.Core.1.0.105.0\lib\net45\System.Data.SQLite.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.EF6, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.EF6.1.0.105.0\lib\net45\System.Data.SQLite.EF6.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data.SQLite.Linq, Version=1.0.105.2, Culture=neutral, PublicKeyToken=db937bc2d44ff139, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\System.Data.SQLite.Linq.1.0.105.0\lib\net45\System.Data.SQLite.Linq.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="EF\SQLite\SQLiteModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLiteModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLite\SQLiteModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLiteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLite\SQLiteModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLiteModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLite\T_Course.cs">
+      <DependentUpon>SQLiteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLite\T_Student.cs">
+      <DependentUpon>SQLiteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLite\T_StudentCourse.cs">
+      <DependentUpon>SQLiteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLite\V_StudentCourseView.cs">
+      <DependentUpon>SQLiteModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\SQLServerModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLServerModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\SQLServerModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\SQLServerModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SQLServerModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\T_YJCollectProgramMonitor_Alm.cs">
+      <DependentUpon>SQLServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\T_YJCollectProgramMonitor_AssistJob.cs">
+      <DependentUpon>SQLServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\T_YJCollectProgramMonitor_BaseData.cs">
+      <DependentUpon>SQLServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\T_YJCollectProgramMonitor_Cron.cs">
+      <DependentUpon>SQLServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\T_YJCollectProgramMonitor_TrLog.cs">
+      <DependentUpon>SQLServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\V_YJCollectProgramMonitor_AlmView.cs">
+      <DependentUpon>SQLServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="EF\SQLServer\V_YJCollectProgramMonitor_BaseDataView.cs">
+      <DependentUpon>SQLServerModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="EF\MySQL\" />
+    <Folder Include="EF\Oracle\" />
+    <Folder Include="Hibernate\" />
+    <Folder Include="iBATIS\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="EF\SQLServer\SQLServerModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SQLServerModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EF\SQLite\SQLite.db" />
+    <EntityDeploy Include="EF\SQLite\SQLiteModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SQLiteModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="EF\SQLite\SQLiteModel.edmx.diagram">
+      <DependentUpon>SQLiteModel.edmx</DependentUpon>
+    </None>
+    <None Include="EF\SQLServer\SQLServerModel.edmx.diagram">
+      <DependentUpon>SQLServerModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="EF\SQLite\SQLiteModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <LastGenOutput>SQLiteModel.Context.cs</LastGenOutput>
+      <DependentUpon>SQLiteModel.edmx</DependentUpon>
+    </Content>
+    <Content Include="EF\SQLite\SQLiteModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SQLiteModel.edmx</DependentUpon>
+      <LastGenOutput>SQLiteModel.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\SQLServer\SQLServerModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SQLServerModel.edmx</DependentUpon>
+      <LastGenOutput>SQLServerModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="EF\SQLServer\SQLServerModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SQLServerModel.edmx</DependentUpon>
+      <LastGenOutput>SQLServerModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="..\packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets" Condition="Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>这台计算机上缺少此项目引用的 NuGet 程序包。使用“NuGet 程序包还原”可下载这些程序包。有关更多信息，请参见 http://go.microsoft.com/fwlink/?LinkID=322105。缺少的文件是 {0}。</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('..\packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\System.Data.SQLite.Core.1.0.105.2\build\net45\System.Data.SQLite.Core.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
